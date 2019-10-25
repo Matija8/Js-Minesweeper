@@ -13,16 +13,7 @@ initializePlayArea(table, num_of_cols, num_of_rows);
 
 //add event listeners
 document.querySelectorAll('.table-cell').forEach(function(item){
-    item.addEventListener('click', function(event){
-        console.log('ID is: ' + item.id);
-        console.log(item.getAttribute('has-mine'));
-        if(item.getAttribute('has-mine') == true){  //bug! nije se jos set-ovala mina? izvaditi f-ju?
-            alert('Cell: ' + item.id + ' has a mine!');
-            item.innerHTML = 'x';
-        } else {
-            item.innerHTML = 'o';
-        }
-    });
+    item.addEventListener('click', fja.bind(item));
 });
 
 
@@ -30,7 +21,16 @@ setMine('0,1');
 
 
 
-
+function fja(event){
+    console.log('ID is: ' + this.id);
+    console.log(this.getAttribute('has-mine'));
+    if(this.getAttribute('has-mine') == 1){  //bug! nije se jos set-ovala mina? izvaditi f-ju?
+        alert('Cell: ' + this.id + ' has a mine!');
+        this.innerHTML = 'x';
+    } else {
+        this.innerHTML = 'o';
+    }
+}
 
 
 
@@ -56,5 +56,5 @@ function initializePlayArea(table, num_of_cols, num_of_rows){
 
 function setMine(id){
     var cell = document.getElementById(id);
-    cell.setAttribute('has-mine', true);
+    cell.setAttribute('has-mine', 1);
 }
